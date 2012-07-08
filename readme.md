@@ -13,7 +13,7 @@ $ npm install mongoose-models
 ```javascript
 require('mongoose-models').init({
 	url: 'mongodb://localhost/dbname',
-	types: [ 'Email', 'Url', 'Uuid' ],
+	types: [ 'email', 'url', 'uuid' ],
 	modelPath: '/path/to/models/dir'
 });
 ```
