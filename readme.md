@@ -88,18 +88,93 @@ Person.findByName('bob', function(err, bob) {
 });
 ```
 
+### Circular References
 
+Circular references are rather messy in Mongoose. To make this much easier there is built-in support for circular references in mongoose-models. For example, say you have two models:
 
+##### Foo.js
 
+```javascript
+var models = require('mongoose-models');
 
+var Bar = models.require('Bar');
 
+models.create('Foo', {
+	schema: {
+		bar: { type: models.types.ObjectId, ref: Bar }
+	}
+});
+```
 
+##### Bar.js
 
+```javascript
+var models = require('mongoose-models');
 
+var Foo = models.require('Foo');
 
+models.create('Bar', {
+	schema: {
+		foo: { type: models.types.ObjectId, ref: Foo }
+	}
+});
+```
 
+This doesn't work because the models are trying to reference each other before they have been created. To make this work, we change the `ref` value like so in both files:
 
+```javascript
+{
+	bar: { type: models.types.ObjectId, ref: {$circular: 'Bar'} }
+}
+```
 
+```javascript
+{
+	foo: { type: models.types.ObjectId, ref: {$circular: 'Foo'} }
+}
+```
 
+Now everything works as expected. There is also a shorter version of this if a model needs to reference itself recursively.
 
+```javascript
+var models = require('mongoose-models');
+
+models.create('Baz', {
+	schema: {
+		child: { type: models.types.ObjectId, ref: '$circular' }
+	}
+});
+```
+
+### Debugging REPL
+
+The REPL is a simple JavaScript interpreter with access to your mongoose-models. Before using the REPL, it will need to be loaded and configured.
+
+```bash
+$ cp ./node_modules/mongoose-models/bin/repl.js ./repl.js
+```
+
+Now, open up `repl.js` and change the values in `conf` to match your configuration settings. You can start the REPL by running:
+
+```bash
+$ node repl.js
+```
+
+The REPL comes with some helpful features on top of the standard node REPL. First, mongoose-models is already loaded for you and is available as `models`. Second, `models.require` has been patched to automatically store loaded models in `global`. There are also some useful functions defined.
+
+```javascript
+Loading REPL...
+> models.require('Foo');
+undefined
+> Foo.find({ }, store('foos'));
+{ ... }
+> 
+Stored 2 arguments in "foos"
+> print(foos);
+{
+  '1': ...
+  '2': ...
+  ...
+}
+```
 
