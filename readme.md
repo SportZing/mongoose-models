@@ -81,7 +81,7 @@ var Person = models.create('Person', {
 ```javascript
 var models = require('mongoose-models');
 
-var Person = models.require('Person');
+var Person = models.require('Person')();
 
 Person.findByName('bob', function(err, bob) {
 	
@@ -97,7 +97,7 @@ Circular references are rather messy in Mongoose. To make this much easier there
 ```javascript
 var models = require('mongoose-models');
 
-var Bar = models.require('Bar');
+var Bar = models.require('Bar')();
 
 models.create('Foo', {
 	schema: {
@@ -111,7 +111,7 @@ models.create('Foo', {
 ```javascript
 var models = require('mongoose-models');
 
-var Foo = models.require('Foo');
+var Foo = models.require('Foo')();
 
 models.create('Bar', {
 	schema: {
@@ -144,6 +144,27 @@ models.create('Baz', {
 		child: { type: models.types.ObjectId, ref: '$circular' }
 	}
 });
+```
+
+### models.require(...)
+
+The `models.require` method that loads models does not return the model directly, but instead returns a function that can be used to fetch the model. This is so that when two models make use of each other, the models are allowed time to set themselves up. That is why models are loaded as `models.require(...)()`. This returned function has a number of properties on it that can be used as well.
+
+#### models.require(...).model
+
+The model function itself (once defined). This is the same as what is returned from the getter function.
+
+#### models.require(...).schema
+
+The mongoose schema object. This can be accessed immediately without waiting for the model to be created if you need access sooner. This could be used as an alternative to the `$circular` syntax described above.
+
+#### models.require(...).resolve( callback )
+
+Defines a callback to be run once the model has been created.
+
+```javascript
+var Foo = models.require('Foo');
+Foo.resolve(function() { Foo = Foo.model; });
 ```
 
 ### Debugging REPL
