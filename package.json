@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/SportZing/mongoose-models"
+    "url": "git://github.com/marco48/mongoose-models"
   },
   "keywords": [
     "mongoose",
@@ -16,12 +16,12 @@
     "db",
     "model"
   ],
-  "author": "James Brumond",
+  "author": "marco",
   "license": "MIT",
   "dependencies": {
-    "mongoose": "~3.0.0",
+    "mongoose": "3.8.4",
     "wrench": "~1.3.9",
-    "mongoose-types": "~1.0.3",
+    "mongoose-types": "marco48/mongoose-types",
     "uuid-v4": "~0.1.0",
     "colors": "0.6.0-1"
   }
