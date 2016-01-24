@@ -1,28 +1,29 @@
 {
-  "name": "mongoose-models",
-  "version": "0.3.1",
-  "description": "A extension to mongoose's models",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/SportZing/mongoose-models"
-  },
-  "keywords": [
-    "mongoose",
-    "mongo",
-    "db",
-    "model"
-  ],
-  "author": "James Brumond",
-  "license": "MIT",
-  "dependencies": {
-    "mongoose": "~3.8.x",
-    "wrench": "~1.3.9",
-    "mongoose-types": "~1.0.3",
-    "uuid-v4": "~0.1.0",
-    "colors": "0.6.0-1"
-  }
+    "name": "mongoose-models",
+    "version": "0.3.1",
+    "description": "A extension to mongoose's models",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/SportZing/mongoose-models"
+    },
+    "keywords": [
+        "mongoose",
+        "mongo",
+        "db",
+        "model"
+    ],
+    "author": "James Brumond",
+    "license": "MIT",
+    "dependencies": {
+        "mongoose": "~4.3.x",
+        "wrench": "~1.3.9",
+        "mongoose-types": "~1.0.3",
+        "uuid-v4": "~0.1.0",
+        "colors": "0.6.0-1",
+        "bson-ext": "*"
+    }
 }
