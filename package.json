@@ -24,6 +24,7 @@
         "mongoose-types": "~1.0.3",
         "uuid-v4": "~0.1.0",
         "colors": "0.6.0-1",
-        "bson-ext": "*"
+        "bson-ext": "*",
+        "bson": "*"
     }
 }
