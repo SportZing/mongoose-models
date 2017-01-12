@@ -19,13 +19,14 @@
     "author": "James Brumond",
     "license": "MIT",
     "dependencies": {
-        "mongoose": "~4.5.x",
+        "mongoose": "~4.7.x",
         "wrench": "~1.3.9",
         "mongoose-types": "~1.0.3",
         "uuid-v4": "~0.1.0",
         "colors": "0.6.0-1",
         "bson-ext": "*",
         "bson": "*",
-        "q": "*"
+        "q": "*",
+        "kerberos": "*"
     }
 }
